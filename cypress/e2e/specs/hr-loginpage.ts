@@ -8,18 +8,14 @@ describe('Login to the Home page', () => {
     beforeEach(function()
     {
         cy.visit('/web/index.php/auth/login');
+        loginObj.login('Admin', 'admin123')
+
     })
 
     it('loginWithValidUserAndPassword',() => { 
-        loginObj.login('Admin', 'admin123')
-    });
-
-    it('ForgottPassword',() => { 
-        loginObj.forgottPassword('Admin')
     });
 
     it('Verify login', () => {
-        loginObj.login('Admin', 'admin123')
         cy.request('/web/index.php/api/v2/dashboard/employees/locations')
         .then((response) => {
             expect(response).property('status').to.equal(200)
@@ -27,7 +23,6 @@ describe('Login to the Home page', () => {
     })
 
     it('create user via api',() => {
-        loginObj.login('Admin', 'admin123')
         cy.request(
             {
                 method: 'POST',
