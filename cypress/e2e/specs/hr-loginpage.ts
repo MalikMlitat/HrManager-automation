@@ -18,7 +18,7 @@ describe('Login to the Home page', () => {
         loginObj.forgottPassword('Admin')
     });
 
-    it.only('Verify login', () => {
+    it('Verify login', () => {
         loginObj.login('Admin', 'admin123')
         cy.request('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/locations')
         .then((response) => {
