@@ -13,4 +13,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npx cypress run --spec="../../cypress/e2e/specs"
+          build: npx cypress run --spec="cypress/e2e/specs"
