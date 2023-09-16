@@ -4,7 +4,8 @@ const loginObj:LoginPage = new LoginPage();
 
 describe('Login to the Home page', () => { 
 
-   
+   var createdUserID: Number;
+
     beforeEach(function()
     {
         cy.visit('/web/index.php/auth/login');
@@ -39,8 +40,27 @@ describe('Login to the Home page', () => {
         ).then((response) =>
         {
             expect(response).property('status').to.equal(200)
+            createdUserID = response.body.data.id;
+            cy.log(createdUserID.toString())
         }
         ) //then
     });
+    // DELETE created user
+    after(() => {
+        cy.request(
+            {
+                method: 'DELETE',
+                url: '/web/index.php/api/v2/admin/users',
+                body:
+                {
+                    "ids": [createdUserID]
+                }
+            }
+        ).then((response) =>
+        {
+            expect(response).property('status').to.equal(200)
+        }
+        )
+      })
 
 })
