@@ -25,4 +25,27 @@ describe('Login to the Home page', () => {
             expect(response).property('status').to.equal(200)
         }) // request
     })
+
+    it('create user via api',() => {
+        loginObj.login('Admin', 'admin123')
+        cy.request(
+            {
+                method: 'POST',
+                url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users',
+                body:
+                {
+                    "username": "Test@user3-123" + Date.now().toString(),
+                    "password": "Test@user1-123",
+                    "status": true,
+                    "userRoleId": 2,
+                    "empNumber": 2
+                }
+            }
+        ).then((response) =>
+        {
+            expect(response).property('status').to.equal(200)
+        }
+        ) //then
+    });
+
 })
