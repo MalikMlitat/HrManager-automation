@@ -1,3 +1,5 @@
+import { BASE_ÙRL } from "../../support/constants";
+
 class LoginPage {
 
     elements=
@@ -27,12 +29,12 @@ class LoginPage {
     forgottPassword(userName: string)
     {   
         this.forgottPasswordElements.forgotPasswordInHomePageBtn().click();
-        cy.url().should('eq', 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode');
+        cy.url().should('eq', BASE_ÙRL + '/web/index.php/auth/requestPasswordResetCode');
 
         this.elements.userName().type(userName);
         this.forgottPasswordElements.resetPasswordBtn().click();
 
-        cy.url().should('eq', 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset');
+        cy.url().should('eq',  BASE_ÙRL + '/web/index.php/auth/sendPasswordReset');
         this.forgottPasswordElements.notifyResetPassword().contains('Reset Password link sent successfully');
 
     }

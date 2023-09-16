@@ -7,7 +7,7 @@ describe('Login to the Home page', () => {
    
     beforeEach(function()
     {
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.visit('/web/index.php/auth/login');
     })
 
     it('loginWithValidUserAndPassword',() => { 
@@ -20,7 +20,7 @@ describe('Login to the Home page', () => {
 
     it('Verify login', () => {
         loginObj.login('Admin', 'admin123')
-        cy.request('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/locations')
+        cy.request('/web/index.php/api/v2/dashboard/employees/locations')
         .then((response) => {
             expect(response).property('status').to.equal(200)
         }) // request
@@ -31,7 +31,7 @@ describe('Login to the Home page', () => {
         cy.request(
             {
                 method: 'POST',
-                url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users',
+                url: '/web/index.php/api/v2/admin/users',
                 body:
                 {
                     "username": "Test@user3-123" + Date.now().toString(),
