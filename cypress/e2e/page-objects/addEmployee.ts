@@ -8,7 +8,7 @@ class addEmployee
         saveNewEmp: () => cy.get('button[type="submit"]'),
         detailsToggBtn: () => cy.get('.oxd-switch-input'),
 
-        userName: () => cy.get(':nth-child(4) > .oxd-grid-2 > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-input'),
+        userName: () => cy.get(':nth-child(4) > .oxd-grid-2 > :nth-child(1) > .oxd-input-group > :nth-child(2)'),
         password: () => cy.get('input[type="password"]'),
     }
     
@@ -21,11 +21,11 @@ class addEmployee
      this.elements.EmployeeInputName().children().eq(2).type(LastName)
      this.elements.detailsToggBtn().click();
 
-     //this.elements.userName().eq(5).type(userName);
+     this.elements.userName().type(userName);
      this.elements.password().eq(0).type(pwd);
-     this.elements.password().children().eq(1).type(pwd);
-
-     //this.elements.saveNewEmp().click();
+     this.elements.password().eq(1).type(pwd);
+     // TODO: enable when delete user is implemented, else "Username already exists" !!
+     // this.elements.saveNewEmp().click();
 
      //cy.log(cy.get('.--strong').text())//.should('eq', firstName)
     }

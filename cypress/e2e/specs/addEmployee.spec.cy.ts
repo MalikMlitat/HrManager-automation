@@ -15,6 +15,6 @@ describe('Employee Functionality', () => {
     })
 
     it('Add new employee via UI',() => {
-        addEmpl.addNewEmployee("FirstName","secondName","lastName", "tss", "mypasss21");
+        addEmpl.addNewEmployee("FirstName","secondName","lastName", "tss432g", "mypasss21");
     });
 })
