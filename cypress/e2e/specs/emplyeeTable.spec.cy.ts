@@ -1,6 +1,6 @@
 
-import LoginPage from "../page-objects/LoginPage"
-import EmployeeTable from "../page-objects/EmployeeTable"
+import LoginPage from "../../support/page-objects/LoginPage"
+import EmployeeTable from "../../support/page-objects/EmployeeTable"
 
 const loginObj:LoginPage = new LoginPage();
 const employeeTable:EmployeeTable = new EmployeeTable();

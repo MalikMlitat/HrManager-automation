@@ -1,4 +1,4 @@
-import { BASE_ÙRL } from "../../support/constants";
+import { BASE_ÙRL } from "../constants";
 
 class LoginPage {
 
@@ -14,7 +14,7 @@ class LoginPage {
         // reset password
         forgotPasswordInHomePageBtn: () => cy.get('.orangehrm-login-forgot-header'),
         resetPasswordBtn: () => cy.get('.oxd-button--secondary'),
-        notifyResetPassword: () => cy.get('.orangehrm-card-container')
+        notifyResetPassword: () => cy.get('.orangehrm-card-container'),
 
     }
 

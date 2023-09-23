@@ -1,4 +1,4 @@
-import LoginPage from "../page-objects/LoginPage"
+import LoginPage from "../../support/page-objects/LoginPage"
 
 const loginObj:LoginPage = new LoginPage();
 
