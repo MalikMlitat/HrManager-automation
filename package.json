@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.2.0"
+    "cypress": "^13.2.0",
+    "@shelex/cypress-allure-plugin": "2.40.0"
   },
   "dependencies": {
     "typescript": "^5.2.2"
