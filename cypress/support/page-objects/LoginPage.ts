@@ -13,13 +13,11 @@ class LoginPage {
 
     lgoinLabelsRequiredWarningFiled =
         {
-            userNameLabelRquired_OnlyUserNameEmpty: () => cy.get('.oxd-input-group > .oxd-text'),
-            passWordLabelRquired_OnlyPasswordEmpty: () => cy.get('.oxd-input-group > .oxd-text'), // TODO(malik): fix this, those are equal
-
             userNameLabelRquired_bothEmpty: () => cy.get(':nth-child(2) > .oxd-input-group > .oxd-text'),
             passwordLabelRquired_bothEmpty: () => cy.get(':nth-child(3) > .oxd-input-group > .oxd-text'),
 
-            classParentFields: () => cy.get('.oxd-input-field-bottom-space'),
+            requiredBelowUserName: () => cy.get('.oxd-input-field-bottom-space').contains('Required').prevAll().contains('Username'),
+            requiredBelowPWD: () => cy.get('.oxd-input-field-bottom-space').contains('Required').prevAll().contains('Password')
         }
 
     forgottPasswordElements =
@@ -61,14 +59,18 @@ class LoginPage {
 
     login_check_empty_username(userName: string, password: string) {
         this.login(userName, password);
-        // assert invalid login
-        //this.elements.loginFailedText().should('contain', 'Invalid credentials')
-        this.lgoinLabelsRequiredWarningFiled.userNameLabelRquired_OnlyUserNameEmpty().should('contain', 'Required')
-        const fields = this.lgoinLabelsRequiredWarningFiled.classParentFields();
-        fields.each(($element) => {
-            // cy.wrap($element).contains('Username') || cy.wrap($element).contains('Password');
+        this.lgoinLabelsRequiredWarningFiled.requiredBelowUserName();
 
-        })
+    }
+    login_check_empty_password(userName: string, password: string) {
+        this.login(userName, password);
+        this.lgoinLabelsRequiredWarningFiled.requiredBelowPWD();
+    }
+
+    login_check_empty_user_and_password(userName: string, password: string) {
+        this.login(userName, password);
+        this.lgoinLabelsRequiredWarningFiled.userNameLabelRquired_bothEmpty();
+        this.lgoinLabelsRequiredWarningFiled.passwordLabelRquired_bothEmpty();
 
     }
 

@@ -48,15 +48,17 @@ describe('Login to the Home page', () => {
             })
         }
 
-        const invalid_loggin_empty_cred_dict = {
-            //tc_name: [username, password]
-            "empty_username_valid_password": ["", "password"],
-        };
-        for (const tc in invalid_loggin_empty_cred_dict)
-        {
-            
-            it(`Valid Logging TC: ${tc}`, () => {
-                loginObj.login_check_empty_username(invalid_loggin_empty_cred_dict[tc][0], invalid_loggin_empty_cred_dict[tc][1]);
-            })
-        }
+
+        it('Invalid logging, USER is empty -> REQUIRED', () => {
+            loginObj.login_check_empty_username(" ", "notEmptyPassword");
+        })
+
+        it('Invalid logging, PWD is empty -> REQUIRED', () => {
+            loginObj.login_check_empty_password('NotEmptyUser','');
+        })
+
+
+        it('Invalid logging, USER and PWD are empty -> REQUIRED x2', () => {
+            loginObj.login_check_empty_user_and_password('','');
+        })
 })
