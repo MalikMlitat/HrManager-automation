@@ -1,1 +1,1 @@
-export const BASE_ÙRL = Cypress.config('baseUrl');
+export const BASE_URL = Cypress.config('baseUrl');

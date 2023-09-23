@@ -1,4 +1,4 @@
-import { BASE_ÙRL } from "../constants";
+import { BASE_URL } from "../constants";
 
 class LoginPage {
 
@@ -6,7 +6,8 @@ class LoginPage {
     {
         userName: () => cy.getByPlaceHolder('Username'),
         password: () => cy.getByPlaceHolder('Password'),
-        loginBtn: () => cy.get('button')
+        loginBtn: () => cy.get('button'),
+        loginFailedText: () => cy.get('.oxd-alert-content')
     }
 
     forgottPasswordElements=
@@ -21,20 +22,40 @@ class LoginPage {
     login(userName: string, password:string)
     {
         this.elements.userName().type(userName);
-        this.elements.password().type(password);
+        if (password != "")
+        {
+           this.elements.password().type(password);
+        }
 
         this.elements.loginBtn().click();
     }
 
+
+    login_check_valid_login(userName: string, password:string)
+    {
+        this.login(userName, password);
+        // assert valid login
+        cy.url().should('eq', BASE_URL + '/web/index.php/dashboard/index');
+    }
+
+    login_check_invalid_login(userName: string, password:string)
+    {
+        this.login(userName, password);
+        // assert invalid login
+        this.elements.loginFailedText().should('contain', 'Invalid credentials')
+
+    }
+
+
     forgottPassword(userName: string)
     {   
         this.forgottPasswordElements.forgotPasswordInHomePageBtn().click();
-        cy.url().should('eq', BASE_ÙRL + '/web/index.php/auth/requestPasswordResetCode');
+        cy.url().should('eq', BASE_URL + '/web/index.php/auth/requestPasswordResetCode');
 
         this.elements.userName().type(userName);
         this.forgottPasswordElements.resetPasswordBtn().click();
 
-        cy.url().should('eq',  BASE_ÙRL + '/web/index.php/auth/sendPasswordReset');
+        cy.url().should('eq',  BASE_URL + '/web/index.php/auth/sendPasswordReset');
         this.forgottPasswordElements.notifyResetPassword().contains('Reset Password link sent successfully');
 
     }
