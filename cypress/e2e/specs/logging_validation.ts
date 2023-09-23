@@ -47,4 +47,16 @@ describe('Login to the Home page', () => {
                 loginObj.login_check_invalid_login(invalid_loggin_dict[tc][0], invalid_loggin_dict[tc][1]);
             })
         }
+
+        const invalid_loggin_empty_cred_dict = {
+            //tc_name: [username, password]
+            "empty_username_valid_password": ["", "password"],
+        };
+        for (const tc in invalid_loggin_empty_cred_dict)
+        {
+            
+            it(`Valid Logging TC: ${tc}`, () => {
+                loginObj.login_check_empty_username(invalid_loggin_empty_cred_dict[tc][0], invalid_loggin_empty_cred_dict[tc][1]);
+            })
+        }
 })
