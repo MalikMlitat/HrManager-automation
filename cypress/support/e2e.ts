@@ -21,3 +21,6 @@ import './commands'
 
 // allure
 import '@shelex/cypress-allure-plugin';
+
+// api plugin
+import 'cypress-plugin-api'

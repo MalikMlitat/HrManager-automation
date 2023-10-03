@@ -22,8 +22,9 @@ export default defineConfig({
         overwrite: true,
         html: true,
         json: true,
-      }
       },
+      snapshotOnly: true
+    },
   },
 
 // import allureWriter from "@shelex/cypress-allure-plugin/writer";

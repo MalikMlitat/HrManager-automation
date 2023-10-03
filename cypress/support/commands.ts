@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import cypress = require("cypress");
+import { CreateUserPayload } from "./interfaces";
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -49,4 +50,28 @@ declare namespace Cypress {
         return cy.get('[placeholder="' + placeholderName +'"]');
     }
 
+
+    const makeAPICall = (method, url, body) => {
+        const expectedStatusCodes = {
+          'POST': 201,
+          'GET': 200,
+          'DELETE': 204
+        };
+      
+        cy.api({
+          method,
+          url,
+          body
+        }).then( (response) => {
+          expect(response.status).to.equal(expectedStatusCodes[method]);
+        })
+      }
+
 Cypress.Commands.add('getByPlaceHolder' as any , getByPlaceHolder);
+Cypress.Commands.add('makeAPICall' as any , makeAPICall);
+
+
+Cypress.Commands.add('postMakeAPICall' as any , (createUserPayload:CreateUserPayload) => {
+    makeAPICall('POST', 'https://conduit.productionready.io/api/users', createUserPayload)
+
+  })
