@@ -2,6 +2,12 @@
 import addEmployee from "../../support/page-objects/addEmployee"
 import LoginPage from "../../support/page-objects/LoginPage"
 import { faker } from '@faker-js/faker';
+import { CREATE_EMPL_REQ } from "../../support/constants";
+
+import { CREATE_VACNCY_API } from "../../support/constants";
+
+
+import { CREATE_CANDIDATE_REQ } from "../../support/constants";
 
 const loginObj: LoginPage = new LoginPage();
 const addEmpl: addEmployee = new addEmployee();
@@ -20,60 +26,29 @@ describe('Employee Functionality', () => {
 
     it('Check schedul interview for candidate', () => {
         // create user to assign to the created vacancy later
-        cy.api(
-            {
-                method: 'POST',
-                url: '/web/index.php/api/v2/pim/employees',
-                body:
-                {
-                    firstName: faker.person.firstName(),
-                    middleName: faker.person.middleName(),
-                    lastName: faker.person.lastName(),
-                    empPicture: null,
-                    employeeId: "555"
-                }
-            }
-        ).then((response) => {
+        cy.api( CREATE_EMPL_REQ ).then((response) => {
             expect(response).property('status').to.equal(200)
             createdEmpNumber = response.body.data.empNumber;
-
             // create vacancy to be assigned to the new candidate
             cy.api({
                 method: 'POST',
-                url: "/web/index.php/api/v2/recruitment/vacancies",
-                body:
+                url: CREATE_VACNCY_API,
+                body: 
                 {
                     name: faker.person.firstName() + " Job Name ",
                     jobTitleId: 22, // JobcategoryId
-                    employeeId: createdEmpNumber,
                     numOfPositions: null,
                     description: "",
                     status: true,
-                    isPublished: true
+                    isPublished: true,
+                    employeeId: createdEmpNumber
                 }
             })
         }).then((response) => {
             expect(response.status).to.equal(200);
             createdVacancyId = response.body.data.id;
-            cy.log(createdVacancyId.toString())
             // API: create candidate <- save:UserID
-
-            cy.api({
-                method: 'POST',
-                url: "/web/index.php/api/v2/recruitment/candidates",
-                body:
-                {
-                    firstName: faker.person.firstName(),
-                    middleName: faker.person.middleName(),
-                    lastName: faker.person.lastName(),
-                    email: faker.internet.email(),
-                    dateOfApplication: "2023-10-14",
-                    vacancyId: 8,
-                    contactNumber: null,
-                    keywords: null,
-                    consentToKeepData: false
-                }
-            }).then((response) => {
+            cy.api(CREATE_CANDIDATE_REQ).then((response) => {
                 expect(response.status).to.equal(200);
                 candidateID = response.body.data.id;
                 // API (UserID): per URL change user to shortlisted candidate
