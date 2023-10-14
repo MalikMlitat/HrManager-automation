@@ -24,3 +24,6 @@ import '@shelex/cypress-allure-plugin';
 
 // api plugin
 import 'cypress-plugin-api'
+
+// cypress/support/index.d.ts
+/// <reference types='cypress-tags' />

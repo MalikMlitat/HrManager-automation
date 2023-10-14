@@ -4,8 +4,8 @@ import LoginPage from "../../support/page-objects/LoginPage"
 
 const loginObj:LoginPage = new LoginPage();
 const addEmpl:addEmployee = new addEmployee();
-
-describe('Employee Functionality', () => { 
+var emplID: String;
+describe(['my-feature'], 'Employee Functionality', () => { 
 
    
     beforeEach(function()
@@ -14,7 +14,7 @@ describe('Employee Functionality', () => {
         loginObj.login('Admin', 'admin123')
     })
 
-    it('Add new employee via UI',() => {
+    it(['my-feature'], 'Add new employee via UI',() => {
         addEmpl.addNewEmployee("FirstName","secondName","lastName", "tss432g", "mypasss21");
     });
 })

@@ -1,5 +1,6 @@
 import { defineConfig } from "cypress";
   const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+import { tagify } from 'cypress-tags';
 
 export default defineConfig({
   e2e: {
@@ -9,6 +10,7 @@ export default defineConfig({
     },
     setupNodeEvents(on, config) {
       allureWriter(on, config);
+      on('file:preprocessor', tagify(config));
       return config;
   },
     baseUrl: 'https://opensource-demo.orangehrmlive.com',
