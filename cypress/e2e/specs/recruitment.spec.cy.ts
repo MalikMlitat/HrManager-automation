@@ -18,12 +18,15 @@ describe('Recruitment Functionality', () => {
     })
 
     it('Match Number of rows between API and UI',() => {
-        // ROWS from UI
         cy.intercept(rowsCandidateAPI).as('getRows');
 
         cy.wait('@getRows').then((interception) => {
+            // ROWS from API
             const rowsFromAPI = interception.response?.body.meta.total;
-            recruitment.elements.getCandidatesRowNumber().should('have.length', rowsFromAPI);
+            // ROWS from UI
+            recruitment.elements.getCandidatesRowNumber()
+            // ASSERTION
+            .should('have.length', rowsFromAPI);
            
           });
     });
