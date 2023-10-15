@@ -32,19 +32,27 @@ describe('Employee Functionality', () => {
             .then((response) => { createdEmpNumber = response.body.data.empNumber; })
             // create vacancy to be assigned to the new candidate
             .then(() => { vacancyhelper.create_vacancy(createdEmpNumber) })
-            // API: create candidate <- save:UserID
             .then((response) => {createdVacancyId = response.body.data.id})
+            // API: create candidate
             .then(() => { vacancyhelper.createCandidateViaAPI() })
-                    .then((response) => { candidateID = response.body.data.id })
-                    // API (UserID): per URL change user to shortlisted candidate
-                    .then(() => { vacancyhelper.visitShortlistedCandidate(candidateID) })
-                    .then((response) => {
-                        expect(response.body.data.action.label).to.equal('Shortlisted');
-                    })
+            .then((response) => { candidateID = response.body.data.id })
+            // API (UserID): per URL change user to shortlisted candidate
+            .then(() => { vacancyhelper.visitShortlistedCandidate(candidateID) })
+            .then((response) => { expect(response.body.data.action.label).to.equal('Shortlisted'); })
+            .then(() => {
+                // schedule interview:
+                cy.visit('/web/index.php/recruitment/addCandidate/' + candidateID);
+                cy.get('.oxd-button--success').click();
+                // start to fill data
+                cy.get(':nth-child(2) > .oxd-grid-3 > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-input').type('what')
+                // assert
             })
+            
+            
         // UI: with UserID visit candidate by url -> schedule interview
         // add employee to add as interviewer
         // UI: fill data (scheduler interview data: Interviewer, date...etc.)
         // assertion interview scheduled
+    })
  
 });
