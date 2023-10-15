@@ -1,13 +1,6 @@
 
 import SchedulInterview from "../../support/page-objects/scheduleInterview"
 import LoginPage from "../../support/page-objects/LoginPage"
-import { faker } from '@faker-js/faker';
-import { CREATE_EMPL_REQ } from "../../support/constants";
-
-import { CREATE_VACNCY_API } from "../../support/constants";
-
-
-import { CREATE_CANDIDATE_REQ } from "../../support/constants";
 
 import VacancyHelper from "../../support/helper/candidateHelper";
 
