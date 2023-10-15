@@ -1,3 +1,6 @@
+export const BASE_URL = Cypress.config('baseUrl');
+export const rowsCandidateAPI = '/web/index.php/api/v2/recruitment/candidates**';
+
 import { faker } from '@faker-js/faker';
 
 export var createdEmpNumber;
@@ -42,3 +45,5 @@ export const CREATE_CANDIDATE_REQ =
     url: CREATE_CANDIDATE_API,
     body: CREATE_CANDIDATE_BODY
 }
+
+
