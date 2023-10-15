@@ -59,10 +59,10 @@ class VacancyHelper {
         {
             note: null
         }
-        
         )
 
     }
+    
 }
 
 export default VacancyHelper;
