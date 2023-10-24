@@ -31,7 +31,7 @@ class LoginPage {
         }
 
     login(userName: string, password: string) {
-        cy.visit('/web/index.php/auth/login');
+        
         if (userName != "") {
             this.elements.userName().type(userName);
         }
@@ -72,6 +72,14 @@ class LoginPage {
         this.lgoinLabelsRequiredWarningFiled.userNameLabelRquired_bothEmpty();
         this.lgoinLabelsRequiredWarningFiled.passwordLabelRquired_bothEmpty();
 
+    }
+
+
+    logout_and_then_login_and_check_valid_login(userName: string, password: string) {
+        cy.wait(2000);
+        cy.get('.oxd-userdropdown-name').click().get('.oxd-dropdown-menu').contains('Logout').click();
+        cy.wait(2000);
+        this.login_check_valid_login(userName, password);
     }
 
     forgottPassword(userName: string) {
