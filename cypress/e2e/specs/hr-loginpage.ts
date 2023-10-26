@@ -8,9 +8,7 @@ describe('Login to the Home page', () => {
 
     beforeEach(function()
     {
-        cy.visit('/web/index.php/auth/login');
         loginObj.login('Admin', 'admin123')
-
     })
 
     it('loginWithValidUserAndPassword',() => { 

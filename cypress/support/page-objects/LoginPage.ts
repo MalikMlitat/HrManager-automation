@@ -31,6 +31,8 @@ class LoginPage {
         }
 
     login(userName: string, password: string) {
+        cy.visit('/web/index.php/auth/login');
+
         
         if (userName != "") {
             this.elements.userName().type(userName);
