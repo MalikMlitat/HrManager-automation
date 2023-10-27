@@ -12,7 +12,6 @@ describe('Recruitment Functionality', () => {
    
     beforeEach(function()
     {
-        
         loginObj.login('Admin', 'admin123');
         cy.visit('web/index.php/recruitment/viewCandidates');
     })

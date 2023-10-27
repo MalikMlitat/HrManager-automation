@@ -2,7 +2,7 @@
   "compilerOptions": {
    "target": "es5",
    "lib": ["es5", "dom"],
-   "types": ["cypress",  "cypress-plugin-api"]
+   "types": ["cypress",  "cypress-plugin-api", "cypress-file-upload"]
  },
  "include": ["**/*.ts"],
  
