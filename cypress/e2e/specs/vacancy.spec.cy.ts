@@ -29,14 +29,14 @@ describe('Vacancy Functionality', () => {
         And The user uploads a file for that vacancy and saves the form
         Then The file should be uploaded and added to vacancy
         */
+        // move to pageObject
         cy.visit("/web/index.php/recruitment/addJobVacancy/" + createdVacancyId)
         cy.get('.oxd-button').contains('Add').click();
         cy.wait(100);
         cy.get('input[type="file"]').selectFile('cypress/fixtures/sample.pdf',{force: true})
-        // fix this, get the correct save button 
-        cy.get('.oxd-text').contains('Add Attachment').parent().get('.oxd-button').contains('Save').click();
-        //cy.get('.oxd-button').contains('type', 'submit').click({force: true})
-        //cy.get(':nth-child(3) > .oxd-form > .oxd-form-actions > .oxd-button--secondary').click({force: true})
+
+        cy.get(':nth-child(3) > .oxd-form > .oxd-form-actions > .oxd-button--secondary').click()
+        cy.get('div').contains('sample.pdf').click();
 
 
     });
