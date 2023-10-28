@@ -33,7 +33,7 @@ class LoginPage {
     login(userName: string, password: string) {
         cy.visit('/web/index.php/auth/login');
 
-        
+
         if (userName != "") {
             this.elements.userName().type(userName);
         }
@@ -76,6 +76,9 @@ class LoginPage {
 
     }
 
+    logout_and_login(userName: string, password: string) {
+        this.logout_and_then_login_and_check_valid_login(userName, password);
+    }
 
     logout_and_then_login_and_check_valid_login(userName: string, password: string) {
         cy.wait(2000);
