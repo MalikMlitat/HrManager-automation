@@ -1,8 +1,10 @@
 
 import VacancyHelper from "../../support/helper/candidateHelper"
 import LoginPage from "../../support/page-objects/LoginPage"
+import VacancyPage from "../../support/page-objects/VacancyPage"
 
 const loginObj: LoginPage = new LoginPage();
+const vacancyObj: VacancyPage = new VacancyPage();
 const vacancyhelper: VacancyHelper = new VacancyHelper();
 
 describe('Vacancy Functionality', () => {
@@ -30,14 +32,7 @@ describe('Vacancy Functionality', () => {
         Then The file should be uploaded and added to vacancy
         */
         // move to pageObject
-        cy.visit("/web/index.php/recruitment/addJobVacancy/" + createdVacancyId)
-        cy.get('.oxd-button').contains('Add').click();
-        cy.wait(100);
-        cy.get('input[type="file"]').selectFile('cypress/fixtures/sample.pdf',{force: true})
-
-        cy.get(':nth-child(3) > .oxd-form > .oxd-form-actions > .oxd-button--secondary').click()
-        cy.get('div').contains('sample.pdf').click();
-
-
+        const file2Upload: string = 'cypress/fixtures/sample.pdf';
+        vacancyObj.upload_sample_pdf(createdVacancyId, file2Upload);
     });
 })
