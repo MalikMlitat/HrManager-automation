@@ -61,6 +61,21 @@ class EmployeeTable
         }
     }
   }
+
+  validateTableRow(columnheader, expectedValue)
+  {
+    cy.get('.oxd-table-header').contains(columnheader).invoke('index').then( (columnIndex) => {
+        cy.get('.oxd-table-body').find('.oxd-table-card').each((element) => {
+            cy.wrap(element).find('.oxd-table-row').find('.oxd-table-cell').eq(columnIndex).invoke('text').then((cell) => {
+                if (cell === expectedValue)
+                {
+                    expect(cell.trim(), 'Found the reow with ' + columnheader).to.equal(expectedValue);
+                }
+            })
+        })
+    });
+
+  }
 }
 
 export default EmployeeTable;

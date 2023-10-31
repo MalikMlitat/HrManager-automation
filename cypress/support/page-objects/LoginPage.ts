@@ -4,8 +4,8 @@ class LoginPage {
 
     elements =
         {
-            userName: () => cy.getByPlaceHolder('Username'),
-            password: () => cy.getByPlaceHolder('Password'),
+            userName: () => cy.getByPlaceHolder('username'),
+            password: () => cy.getByPlaceHolder('password'),
             loginBtn: () => cy.get('button'),
             loginFailedText: () => cy.get('.oxd-alert-content'),
 
